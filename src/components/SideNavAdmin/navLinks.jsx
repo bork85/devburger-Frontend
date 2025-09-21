@@ -21,6 +21,12 @@ export const navLinks = [
     },
     {
         id: 4,
+        label: 'Categorias',
+        path: '/admin/categorias',
+        icon: <ListStarIcon size={32} weight="duotone"/>
+    },
+    {
+        id: 5,
         label: 'Nova Categoria',
         path: '/admin/nova-categoria',
         icon: <ListStarIcon size={32} weight="duotone"/>

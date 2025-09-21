@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import BannerCategory from "../../assets/BannerCategory.png"
 import Padrao from '../../assets/Padrao.png'
-import { Link } from "react-router-dom";
 
 export const Banner = styled.div`
     display: flex;
@@ -37,11 +36,11 @@ export const Banner = styled.div`
 
 export const Container = styled.div`
     width: 100%;
-    min-height: 100vh;
+    min-height: 91.5vh;
     background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
     align-content: center;
     background-image: linear-gradient(rgba(255,255,255,0.65),rgba(255,255,255,0.25)),url('${Padrao}');

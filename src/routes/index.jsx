@@ -1,6 +1,6 @@
 
 import { Route, Routes } from "react-router-dom";
-import { Login, Register, Home, Menu, Cart, Checkout, CompletePayment, Orders, Products, NewProduct, UpdateProduct, NewCategory } from "../containers"
+import { Login, Register, Home, Menu, Cart, Checkout, CompletePayment, Orders, Products, NewProduct, UpdateProduct, NewCategory, Categories, UpdateCategory } from "../containers"
 import { UserLayout } from "../layouts/UserLayout";
 import { AdminLayout } from "../layouts/AdminLayout";
 
@@ -17,9 +17,11 @@ export function Router() {
             <Route path="/admin" element={<AdminLayout />}>
                 <Route path="/admin/pedidos" element={<Orders />} />
                 <Route path="/admin/produtos" element={<Products />} />
+                <Route path="/admin/categorias" element={<Categories />} />
                 <Route path="/admin/novo-produto" element={<NewProduct />} />
                 <Route path="/admin/nova-categoria" element={<NewCategory />} />
-                <Route path="/admin/alterar-produto" element={<UpdateProduct />} />           
+                <Route path="/admin/alterar-produto" element={<UpdateProduct />} />
+                <Route path="/admin/alterar-categoria" element={<UpdateCategory />} />            
             </Route>
 
             <Route path="/login" element={<Login />}></Route>

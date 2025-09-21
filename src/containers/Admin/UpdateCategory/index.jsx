@@ -1,4 +1,4 @@
-import { Controller, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { ImageIcon } from "@phosphor-icons/react"
@@ -6,25 +6,17 @@ import { Container, Form, InputGroup, Input, Label, LabelUpload, SubmitButton, T
 import { useState } from "react"
 import { api } from "../../../services/api"
 import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const schema = yup
     .object({
-        name: yup.string().required('Informe um nome válido!'),        
-        file: yup.mixed()
-            .test('required', 'Informe um aquivo de imagem!', (value) => {
-                return value && value.length > 0;
-            })
-            .test('fileSize', 'São permitidos arquivos até 5MB!', (value) => {
-                return value && value.length > 0 && value[0].size <= 5000000; 
-             }).test('type', 'Somente arquivos PNG ou JPEG são permitidos!', (value) => {
-                return value && value.length > 0 && (value[0].type === 'image/png' || value[0].type === 'image/jpeg'); 
-            }),
+        name: yup.string().required('Informe um nome válido!'),
     })
     .required()
 
-export function NewCategory() {
+export function UpdateCategory() {
     const [filename, setFilename] = useState(null);
+    const { state: { category } } = useLocation();
     const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
@@ -34,10 +26,10 @@ export function NewCategory() {
         categoryFormData.append('name', data.name);
         categoryFormData.append('file', data.file[0]);
 
-        await toast.promise(api.post('/categories', categoryFormData), {
-            pending: 'Adicionando categoria, aguarde...',
-            success: 'Categoria adicionada com sucesso!',
-            error: 'Falha ao adicionar categoria, tente novamente!'
+        await toast.promise(api.put(`/categories/${category.id}`, categoryFormData), {
+            pending: 'Editando categoria, aguarde...',
+            success: 'Categoria editada com sucesso!',
+            error: 'Falha ao editar categoria, tente novamente!'
         });
         setTimeout(() => {
             navigate('/admin/categorias')
@@ -47,16 +39,18 @@ export function NewCategory() {
     return (
         <div id="ContainerTop">
             <Title>
-                <h1>Cadastro de Categoria</h1>
+                <h1>Atualização de Categoria</h1>
             </Title>
             <Container>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputGroup>
                         <Label>Nome</Label>
-                        <Input {...register("name")} placeholder='Informe nome do produto...' />
+                        <Input
+                            {...register("name")}
+                            placeholder='Informe nome do produto...'
+                            defaultValue={category.name} />
                         <ErrorMessage>{errors.name?.message}</ErrorMessage>
-                    </InputGroup>
-                    
+                    </InputGroup>                   
                     <InputGroup>
                         <LabelUpload>
                             <ImageIcon />
@@ -68,13 +62,12 @@ export function NewCategory() {
                                     setFilename(value.target?.files[0]?.name);
                                     register('file').onChange(value);
                                 }} />
-                            {filename || 'Upload imagem categoria'}
+                            {filename || 'Upload imagem produto'}
                         </LabelUpload>
-                    </InputGroup>
-                    
-                    <SubmitButton>Adicionar Categoria</SubmitButton>
+                    </InputGroup>                
+                    <SubmitButton>Editar Produto</SubmitButton>
                 </Form>
             </Container>
         </div>
     )
-}   
+}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ReactSelect from 'react-select'
 import Button from "../../../components/Button";
 
 export const Container = styled.div`
@@ -59,7 +60,6 @@ export const LabelUpload = styled.label`
         display: none;
     }
 `
-
 export const SubmitButton = styled(Button)`
     margin-top: 40px;
 `
