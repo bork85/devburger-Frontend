@@ -43,7 +43,7 @@ Este projeto foi desenvolvido com HTML, CSS e JavaScript com React. E interage c
 ## 💡 Proximos Passos
 
 Acrescentar outros metodos de pagamento como Pix, debito <br>
-Criar novas funcionalidades como Adicionar categorias, editar categorias <br>
+Criar novas funcionalidades como Adicionar categorias, editar categorias ✔️ <br>
 Acrescentar detalhes de cada produto <br>
 Funcionalidade para acrescentar detalhes nos pedidos <br>
 
