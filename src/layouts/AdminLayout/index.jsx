@@ -3,7 +3,8 @@ import { Footer, SideNavAdmin } from "../../components";
 import { Container } from "./style";
 
 export function AdminLayout() {
-    const { admin: isAdmin } = JSON.parse(localStorage?.getItem('devburger:UserData'))
+    const userData = localStorage.getItem('devburger:UserData');
+    const isAdmin = userData && JSON.parse(userData).admin;
 
     return isAdmin ?
         (

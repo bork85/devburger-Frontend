@@ -39,13 +39,11 @@ export function Login() {
         
             if (status === 200 || status === 201) {
                 console.log(response.data.admin);
-                setTimeout(() => {
-                    if (!response?.data?.admin) {
-                         navigate('/');
-                    } else{
-                        navigate('/admin/pedidos')
-                    }
-                }, 5000);
+                if (!response?.data?.admin) {
+                    navigate('/');
+                } else {
+                    navigate('/admin/pedidos');
+                }
                 putUserData(newData);
                 toast.success('Login realizado com sucesso!');
             } else if (status === 400 || status === 401) {

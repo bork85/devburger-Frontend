@@ -21,7 +21,9 @@ export function Register() {
         resolver: yupResolver(schema)
     });
     const onSubmit = async (data) => {
-        try {            
+        console.log('onSubmit chamado', data)
+        try {
+            console.log('antes do api.post')
             const { status } = await api.post('/users', {
                 name: data.name,
                 email: data.email,
@@ -31,7 +33,7 @@ export function Register() {
                 {
                     validateStatus: () => true,
                 });
-               // console.log(status);
+               console.log("oi");
             if (status === 201 || status === 200) {
                 setTimeout(() => {
                     navigate('/login');
@@ -44,6 +46,7 @@ export function Register() {
             }
         // eslint-disable-next-line no-unused-vars
         } catch (error) {
+            console.error('erro detalhado:', error?.message, error?.code, error?.response)
             toast.error('Ops, algo deu errado, tente novamente!');
         }
 
@@ -56,25 +59,25 @@ export function Register() {
             </LeftContainer>
             <RightContainer>
                 <Title><span>Criar Conta</span></Title>
-                <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form onSubmit={(e) => { e.preventDefault(); handleSubmit(onSubmit, (erros) => console.log('Erros de validação:', erros))(e); }}>
                     <InputContainer>
                         <label>Nome</label>
-                        <input type="text" {...register('name')} id="name" name="name" placeholder="Digite seu nome" autoComplete= "off" required />
+                        <input type="text" {...register('name')} id="name" placeholder="Digite seu nome" autoComplete="off" />
                         <p>{errors?.name?.message}</p>
                     </InputContainer>
                     <InputContainer>
                         <label>Email</label>
-                        <input type="email" {...register('email')} id="email" name="email" placeholder="Digite seu email" autoComplete= "off" required />
+                        <input type="email" {...register('email')} id="email" placeholder="Digite seu email" autoComplete="off" />
                         <p>{errors?.email?.message}</p>
                     </InputContainer>
                     <InputContainer>
                         <label>Senha</label>
-                        <input type="password" {...register('password')} id="password" name="password" placeholder="Digite sua senha" autoComplete= "off" required />
+                        <input type="password" {...register('password')} id="password" placeholder="Digite sua senha" autoComplete="off" />
                         <p>{errors?.password?.message}</p>
                     </InputContainer>
                     <InputContainer>
                         <label>Confirme sua Senha</label>
-                        <input type="password" {...register('confirmPassword')} id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha" autoComplete= "off"required />
+                        <input type="password" {...register('confirmPassword')} id="confirmPassword" placeholder="Confirme sua senha" autoComplete="off" />
                         <p>{errors?.confirmPassword?.message}</p>
                     </InputContainer>
 

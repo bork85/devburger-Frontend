@@ -18,13 +18,7 @@ export const UserProvider = ({children}) => {
         localStorage.removeItem('devburger:UserData');
     };
 
-    // Este useEffect agora é apenas para sincronizar o estado com o localStorage,
-    // garantindo que ele seja atualizado corretamente quando a página for recarregada ou em produção.
-    useEffect(() => {
-        if (Object.keys(userInfo).length > 0) {
-            localStorage.setItem('devburger:UserData', JSON.stringify(userInfo));
-        }
-    }, [userInfo]);
+
 
     return (
         <UserContext.Provider value={{userInfo, putUserData, logout}}>{children}</UserContext.Provider>
