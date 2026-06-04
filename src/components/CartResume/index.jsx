@@ -29,7 +29,7 @@ export function CartResume(){
             //console.log(products)
             //console.log(cartProducts)
             const {data} = await api.post('/create-payment-intent', { products })
-            //console.log(response)
+            console.log('payment-intent data:', data)
             navigate('/checkout', {state: data})
         } catch (error) {
             toast.error('Erro: tente novamente!', {
