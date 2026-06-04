@@ -22,7 +22,7 @@ export default function CheckoutForm() {
         e.preventDefault();
 
         if (!stripe || !elements) {
-            console.error('Stripe ou Elements com erro. Tente novamente!')
+            console.error(' Stripe ou Elements com erro. Tente novamente! ')
             return;
         }
 
